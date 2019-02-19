@@ -11,6 +11,7 @@
       <title>Mission to Mars</title>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
+   
     
     <body>
       <div class="container-fluid">
@@ -18,12 +19,32 @@
           <h1>Mission to Mars</h1>
           <p><a class="btn btn-primary btn-lg" href="/getData" role="button">Scrape New Data</a></p>
         </div>
-        <img src='{{ mars_info["featured_image_url"][0] }}' alt="Sloth">
-        <h2>Mars information</h2>
-        <h3>News Title: {{ mars_info["news_titles"] }}</h3>
-        <h3>Paragraphs: {{  mars_info["news_titles_paragraphs"] }}</h3>
+
       </div>
+      <div class="container ">
+        <div class="row">
+          <h3> Latest Mars News</h3>
+          <h4><p><strong>{{ mars_info["news_titles"][0] }}</strong></p></h4>
+          <p>{{mars_info["news_titles_paragraphs"][0]}}</p>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <img src='{{ mars_info["featured_image_url"][0] }}' alt="Mars Featured Image" width="700", height="700">
+            </div>
+            <div class="col-md-4">
+                    <div class="row">
+                            <h4> Latest Mars News</h4>
+                            {{mars_info["mars_weather"] }}
+                    </div>
+                    <div class="row">
+                            <h4> Mars Facts</h4>
+                           {{ fact_table  }}                          
+                    </div>
+
+            </div>
+        </div>
       </div>
+
     </body>
     
     </html>
