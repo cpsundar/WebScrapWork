@@ -10,6 +10,14 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Mission to Mars</title>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <style>
+          table, th, td {
+                           border: 1px solid black;
+                        }
+          div.a {
+                text-align: center;
+                }
+      </style>
     </head>
    
     
@@ -23,25 +31,65 @@
       </div>
       <div class="container ">
         <div class="row">
-          <h3> Latest Mars News</h3>
+          <h3><strong> Latest Mars News</strong></h3>
           <h4><p><strong>{{ mars_info["news_titles"][0] }}</strong></p></h4>
           <p>{{mars_info["news_titles_paragraphs"][0]}}</p>
         </div>
         <div class="row">
             <div class="col-md-8">
+                <h3> <strong> Featured Mars image</strong></h3>
                 <img src='{{ mars_info["featured_image_url"][0] }}' alt="Mars Featured Image" width="700", height="700">
             </div>
             <div class="col-md-4">
                     <div class="row">
-                            <h4> Latest Mars News</h4>
+                        <table>
+                          <tr>
+                            <td>
+                            <h4> <strong> Current weather on Mars</strong></h4>
                             {{mars_info["mars_weather"] }}
+                          </td>
+                        </tr>
+                          </table>
+                        
                     </div>
                     <div class="row">
                             <h4> Mars Facts</h4>
-                           {{ fact_table  }}                          
+
+                          <table>
+                              {% for row in mars_info["mars_facts"] %}
+                            <tr>
+                              <td><strong>{{row["name"]}}</strong></td><td>{{row["value"]}}</td>                              
+                            </tr>
+                            {% endfor %}
+                          </table>                        
                     </div>
 
             </div>
+          </div>
+        <div class="row">
+          <div class="a">
+              <h3><strong> Mars Hemispheres</strong></h3>
+          </div>
+        </div>    
+        <div class="row">  
+            <div class="col-md-6">
+                <img src='{{ mars_info["mars_hemisphere"][0]["image_url"] }}' alt="Mars Hemisphere Image" width="400", height="400">
+                <h4><strong>{{ mars_info["mars_hemisphere"][0]["title"] }}</strong></h4>
+            </div>
+            <div class="col-md-6">
+                <img src='{{ mars_info["mars_hemisphere"][1]["image_url"] }}' alt="Mars Hemisphere Image" width="400", height="400">
+                <h4><strong>{{ mars_info["mars_hemisphere"][1]["title"] }}</strong></h4>
+            </div>            
+        </div>  
+        <div class="col-md-6">
+            <img src='{{ mars_info["mars_hemisphere"][2]["image_url"] }}' alt="Mars Hemisphere Image" width="400", height="400">
+            <h4><strong>{{ mars_info["mars_hemisphere"][2]["title"] }}</strong></h4>
+        </div>
+        <div class="col-md-6">
+            <img src='{{ mars_info["mars_hemisphere"][3]["image_url"] }}' alt="Mars Hemisphere Image" width="400", height="400">
+            <h4><strong>{{ mars_info["mars_hemisphere"][3]["title"] }}</strong></h4>
+        </div>            
+    </div>          
         </div>
       </div>
 

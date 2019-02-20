@@ -29,12 +29,12 @@ def index():
     # Store the entire team collection in a list
     # mars_info = "getting mars infor"
     mars_info = db["mars_info"].find_one()
-    fact_table = mars_info["mars_fact_html"]
+    #fact_table = mars_info["mars_fact_html"]
  
     #print(mars_info)
     # Return the template with the teams list passed in
     if (mars_info):
-        return render_template('index.html', mars_info=mars_info, fact_table=fact_table )
+        return render_template('index.html', mars_info=mars_info)
     else:
         redirect("/getData", code=302)
 

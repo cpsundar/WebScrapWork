@@ -87,15 +87,43 @@ def scrape():
     Mars_scrape_data["mars_weather"] = mars_weather[0]
 
     #### Create a HTML file about Mars Facts using pandas scraping
+    
 
     facts_url = "https://space-facts.com/mars/"
     response = requests.get(weather_url)
     tables = pd.read_html(facts_url)
 
     df = tables[0]
-    Mars_scrape_data["mars_fact_html"] = df.to_html()
+    Mars_Facts=[]
+    mars_Facts_list=df.values
+    for item in mars_Facts_list:
+        temp_dict={}
+        temp_dict["name"]=item[0]
+        temp_dict["value"]=item[1]
+        Mars_Facts.append(temp_dict)
+        
+    Mars_scrape_data["mars_facts"] = Mars_Facts
 
     #df.to_html('mars_fact.html')
+
+    #### Hemishpere info
+    Hemi_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    response = requests.get(Hemi_url)
+    soup_Hemis = BeautifulSoup(response.text, "html.parser")
+
+    Mars_Hemispheres = []
+    for item_2 in soup_Hemis.find_all('div', class_='item'):
+        temp_dict = {}
+        #print(item_2.div.h3.text)
+        #print(item_2.a.img["src"])
+        #print(item_2.a["href"])
+        temp_dict["title"]=item_2.div.h3.text
+        temp_dict["image_url"]= f'https://astrogeology.usgs.gov{item_2.a.img["src"]}'
+        temp_dict["link"]=f'https://astrogeology.usgs.gov{item_2.a["href"]}'
+        #print(temp_dict)
+        Mars_Hemispheres.append(temp_dict)
+
+    Mars_scrape_data["mars_hemisphere"]=Mars_Hemispheres
 
     return Mars_scrape_data
 
